@@ -21,11 +21,6 @@ commands:
             python -m pip install --user -r requirements-dev.txt
             python -m pip install --user flake8
 
-            # Temporary solution until new camille distribution
-            python -m pip install --user scikit-build
-            python -m pip install --user pybind11
-            python -m pip install --user git+https://github.com/equinor/camille.git
-
   flake8_req_check:
     steps:
       - run:
