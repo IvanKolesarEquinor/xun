@@ -183,6 +183,47 @@ jobs:
       - checkout
       - create-wheel
       - upload-pypi
+  
+  appimage-upload:
+    docker:
+      - image: "circleci/python:3.8"
+    environment:
+      - VERSION: 0.1
+    steps:
+      - run:
+          name: Create python3.8 based AppImage
+          command: |
+            python -m pip install python_appimage
+            python -m python_appimage build local -d ./python3.8.AppImage -p /usr/local/bin/python
+      - run:
+          name: Install Xun to image
+          command: |
+            ./python3.8.AppImage --appimage-extract
+            ./squashfs-root/AppRun -m pip install git+https://github.com/equinor/xun.git
+      - run: 
+          name: Setup Xun AppImage
+          command: |
+            sed -i -e 's|/opt/python3.8/bin/python3.8|/usr/bin/xun|g' ./squashfs-root/AppRun
+            mv squashfs-root/usr/share/applications/python3.8.6.desktop squashfs-root/usr/share/applications/xun.desktop
+            sed -i -e 's|^Name=.*|Name=Xun|g' squashfs-root/usr/share/applications/*.desktop
+            sed -i -e 's|^Exec=.*|Exec=Xun|g' squashfs-root/usr/share/applications/*.desktop
+            sed -i -e 's|^Icon=.*|Icon=xun|g' squashfs-root/usr/share/applications/*.desktop
+            rm squashfs-root/*.desktop
+            cp squashfs-root/usr/share/applications/*.desktop squashfs-root/
+            mv squashfs-root/python.png squashfs-root/xun.png
+            mv squashfs-root squashfs-root-xun
+      - run:
+          name: Convert back into an AppImage
+          command: |
+            wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
+            chmod +x appimagetool-*.AppImage
+            ./appimagetool-587-x86_64.AppImage --appimage-extract
+            ./squashfs-root/AppRun squashfs-root-xun/
+      - run:
+          name: Upload AppImage
+          command: |
+            echo "hello world"
+
 
 workflows:
   version: 2
@@ -256,3 +297,13 @@ workflows:
     jobs:
       - python-formatting-check:
           name: Python formatting check
+  
+  appimage:
+    jobs:
+      - appimage-upload:
+          name: Create and upload appimage 
+#          filters:
+#            tags:
+#              only: /[0-9]+(\.[0-9]+)*/
+#            branches:
+#              ignore: /.*/
