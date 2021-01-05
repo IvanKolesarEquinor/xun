@@ -204,7 +204,7 @@ jobs:
           name: Setup Xun AppImage
           command: |
             sed -i -e 's|/opt/python3.8/bin/python3.8|/usr/bin/xun|g' ./squashfs-root/AppRun
-            mv squashfs-root/usr/share/applications/python3.8.6.desktop squashfs-root/usr/share/applications/xun.desktop
+            mv squashfs-root/usr/share/applications/python3.8.7.desktop squashfs-root/usr/share/applications/xun.desktop
             sed -i -e 's|^Name=.*|Name=Xun|g' squashfs-root/usr/share/applications/*.desktop
             sed -i -e 's|^Exec=.*|Exec=Xun|g' squashfs-root/usr/share/applications/*.desktop
             sed -i -e 's|^Icon=.*|Icon=xun|g' squashfs-root/usr/share/applications/*.desktop
