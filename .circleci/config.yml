@@ -217,7 +217,7 @@ jobs:
           command: |
             wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
             chmod +x appimagetool-*.AppImage
-            ./appimagetool-587-x86_64.AppImage --appimage-extract
+            ./appimagetool-635-x86_64.AppImage --appimage-extract
             ./squashfs-root/AppRun squashfs-root-xun/
       - run:
           name: Upload AppImage
