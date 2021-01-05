@@ -222,7 +222,7 @@ jobs:
       - run:
           name: Upload AppImage
           command: |
-            echo "upload appimage now"
+            echo "upload appimage again"
 
 
 workflows:
