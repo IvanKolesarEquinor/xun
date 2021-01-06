@@ -229,35 +229,35 @@ jobs:
 workflows:
   version: 2
 
-  linux-check:
-    jobs:
-      - python-version-check:
-          name: Python 3.5
-          version: "3.5"
-      - python-version-check:
-          name: Python 3.6
-          version: "3.6"
-      - python-version-check:
-          name: Python 3.7
-          version: "3.7"
-      - python-version-check:
-          name: Python 3.8
-          version: "3.8"
+#  linux-check:
+#    jobs:
+#      - python-version-check:
+#          name: Python 3.5
+#          version: "3.5"
+#      - python-version-check:
+#          name: Python 3.6
+#          version: "3.6"
+#      - python-version-check:
+#          name: Python 3.7
+#          version: "3.7"
+#      - python-version-check:
+#          name: Python 3.8
+#          version: "3.8"
 
-  macos-check:
-    jobs:
-      - python-macos-check:
-          name: MacOS Python 3.5
-          python-version: "3.5"
-      - python-macos-check:
-          name: MacOS Python 3.6
-          python-version: "3.6"
-      - python-macos-check:
-          name: MacOS Python 3.7
-          python-version: "3.7"
-      - python-macos-check:
-          name: MacOS Python 3.8
-          python-version: "3.8"
+#  macos-check:
+#    jobs:
+#      - python-macos-check:
+#          name: MacOS Python 3.5
+#          python-version: "3.5"
+#      - python-macos-check:
+#          name: MacOS Python 3.6
+#          python-version: "3.6"
+#      - python-macos-check:
+#          name: MacOS Python 3.7
+#          python-version: "3.7"
+#      - python-macos-check:
+#          name: MacOS Python 3.8
+#          python-version: "3.8"
 
 #  linux-deploy:
 #    jobs:
@@ -288,23 +288,23 @@ workflows:
 #            branches:
 #              ignore: /.*/
 
-  code-check:
-    jobs:
-      - python-code-check:
-          name: Python code check
+#  code-check:
+#    jobs:
+#      - python-code-check:
+#          name: Python code check
 
 
-  formatting-check:
-    jobs:
-      - python-formatting-check:
-          name: Python formatting check
+#  formatting-check:
+#    jobs:
+#      - python-formatting-check:
+#          name: Python formatting check
   
   appimage:
     jobs:
       - appimage-upload:
           name: Create and upload appimage 
-          filters:
-            tags:
-              only: /[0-9]+(\.[0-9]+)*/
-            branches:
-              ignore: /.*/
+#          filters:
+#            tags:
+#              only: /[0-9]+(\.[0-9]+)*/
+#            branches:
+#              ignore: /.*/
