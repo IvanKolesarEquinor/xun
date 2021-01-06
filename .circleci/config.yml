@@ -187,8 +187,8 @@ jobs:
   appimage-upload:
     docker:
       - image: "circleci/python:3.8"
-    environment:
-      - VERSION: ${CIRCLE_TAG}
+#    environment:
+#      - VERSION: ${CIRCLE_TAG}
     steps:
       - run:
           name: Create python3.8 based AppImage
@@ -215,6 +215,9 @@ jobs:
       - run:
           name: Convert back into an AppImage
           command: |
+            echo 'export VERSION=${CIRCLE_TAG}' >> $BASH_ENV
+            source $BASH_ENV
+            echo $VERSION
             wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
             chmod +x appimagetool-*.AppImage
             ./appimagetool-635-x86_64.AppImage --appimage-extract
@@ -223,7 +226,7 @@ jobs:
           name: Upload AppImage
           command: |
             echo "upload appimage tag"
-            echo $VERSION
+            
 
 
 workflows:
