@@ -188,7 +188,7 @@ jobs:
     docker:
       - image: "circleci/python:3.8"
     environment:
-      - VERSION: $CIRCLE_TAG
+      - VERSION: ${CIRCLE_TAG}
     steps:
       - run:
           name: Create python3.8 based AppImage
@@ -223,7 +223,7 @@ jobs:
           name: Upload AppImage
           command: |
             echo "upload appimage tag"
-            echo $CIRCLE_TAG
+            echo $VERSION
 
 
 workflows:
