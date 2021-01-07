@@ -211,7 +211,7 @@ jobs:
           name: Setup Xun AppImage
           command: |
             sed -i -e 's|/opt/python3.8/bin/python3.8|/usr/bin/xun|g' ./squashfs-root/AppRun
-            mv squashfs-root/usr/share/applications/python3.8.7.desktop squashfs-root/usr/share/applications/xun.desktop
+            mv squashfs-root/usr/share/applications/python3.8.7.desktop squashfs-root/usr/share/applications/org.equinor.xun.desktop
             sed -i -e 's|^Name=.*|Name=Xun|g' squashfs-root/usr/share/applications/*.desktop
             sed -i -e 's|^Exec=.*|Exec=Xun|g' squashfs-root/usr/share/applications/*.desktop
             sed -i -e 's|^Icon=.*|Icon=xun|g' squashfs-root/usr/share/applications/*.desktop
@@ -219,7 +219,7 @@ jobs:
             cp squashfs-root/usr/share/applications/*.desktop squashfs-root/
             mv squashfs-root/python.png squashfs-root/xun.png
             rm squashfs-root/usr/share/metainfo/*.appdata.xml
-            cp appimage/xun.appdata.xml squashfs-root/usr/share/metainfo/xun.appdata.xml
+            cp appimage/org.equinor.xun.appdata.xml squashfs-root/usr/share/metainfo/org.equinor.xun.appdata.xml
             mv squashfs-root squashfs-root-xun
       - run:
           name: Convert back into an AppImage
