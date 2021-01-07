@@ -193,6 +193,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Setup missing apps
+          command: |
+            sudo apt-get update
+            sudo apt-get install appstream
+      - run:
           name: Create python3.8 based AppImage
           command: |
             python -m pip install python_appimage
