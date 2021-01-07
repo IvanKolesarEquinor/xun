@@ -189,6 +189,7 @@ jobs:
       - image: "circleci/python:3.8"
     environment:
       - VERSION: << pipeline.git.branch >>
+      - ARCH: x86_64
     steps:
       - checkout
       - run:
@@ -204,8 +205,6 @@ jobs:
       - run: 
           name: Setup Xun AppImage
           command: |
-            echo "$(pwd)"
-            echo "$(ls)"
             sed -i -e 's|/opt/python3.8/bin/python3.8|/usr/bin/xun|g' ./squashfs-root/AppRun
             mv squashfs-root/usr/share/applications/python3.8.7.desktop squashfs-root/usr/share/applications/xun.desktop
             sed -i -e 's|^Name=.*|Name=Xun|g' squashfs-root/usr/share/applications/*.desktop
@@ -214,8 +213,9 @@ jobs:
             rm squashfs-root/*.desktop
             cp squashfs-root/usr/share/applications/*.desktop squashfs-root/
             mv squashfs-root/python.png squashfs-root/xun.png
-            mv appimage/xun.appdata.xml squashfs-root/usr/share/metainfo/xun.desktop.appdata.xml
+            cp appimage/xun.appdata.xml squashfs-root/usr/share/metainfo/xun.appdata.xml
             mv squashfs-root squashfs-root-xun
+            ls -al squashfs-root-xun/usr/share/metainfo/
       - run:
           name: Convert back into an AppImage
           command: |
