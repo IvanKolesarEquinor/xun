@@ -218,9 +218,9 @@ jobs:
             rm squashfs-root/*.desktop
             cp squashfs-root/usr/share/applications/*.desktop squashfs-root/
             mv squashfs-root/python.png squashfs-root/xun.png
+            rm squashfs-root/usr/share/metainfo/*.appdata.xml
             cp appimage/xun.appdata.xml squashfs-root/usr/share/metainfo/xun.appdata.xml
             mv squashfs-root squashfs-root-xun
-            ls -al squashfs-root-xun/usr/share/metainfo/
       - run:
           name: Convert back into an AppImage
           command: |

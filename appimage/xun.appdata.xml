@@ -6,7 +6,8 @@
 	<name>Xun</name>
 	<summary>Scriptable workflow</summary>
 	<description>
-		<p>Scriptable workflow.</p>
+		<p>Scriptable workflow. This should be longer description.</p>
+		<p>The library is intended for processing of wind timeseries data.Name Xun is based from the bakua wind symbol.</p>
 	</description>
 	<launchable type="desktop-id">xun.desktop</launchable>
 	<url type="homepage">https://github.com/equinor/xun</url>
