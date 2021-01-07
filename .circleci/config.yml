@@ -190,6 +190,8 @@ jobs:
     environment:
       - VERSION: << pipeline.git.branch >>
       - ARCH: x86_64
+      - TRAVIS_PULL_REQUEST: "false"
+      - TRAVIS_TAG: << pipeline.git.tag >>
     steps:
       - checkout
       - run:
@@ -224,6 +226,9 @@ jobs:
       - run:
           name: Convert back into an AppImage
           command: |
+            echo "export TRAVIS_REPO_SLUG=${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" >> $BASH_ENV
+            source $BASH_ENV
+            echo $TRAVIS_REPO_SLUG
             wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
             chmod +x appimagetool-*.AppImage
             ./appimagetool-*-x86_64.AppImage --appimage-extract
