@@ -214,7 +214,7 @@ jobs:
             rm squashfs-root/*.desktop
             cp squashfs-root/usr/share/applications/*.desktop squashfs-root/
             mv squashfs-root/python.png squashfs-root/xun.png
-            mv .circleci/appimage/xun.appdata.xml squashfs-root-xun/usr/share/metainfo/xun.desktop.appdata.xml
+            mv appimage/xun.appdata.xml squashfs-root/usr/share/metainfo/xun.desktop.appdata.xml
             mv squashfs-root squashfs-root-xun
       - run:
           name: Convert back into an AppImage
