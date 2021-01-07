@@ -190,6 +190,7 @@ jobs:
     environment:
       - VERSION: << pipeline.git.branch >>
     steps:
+      - checkout
       - run:
           name: Create python3.8 based AppImage
           command: |
@@ -211,6 +212,7 @@ jobs:
             rm squashfs-root/*.desktop
             cp squashfs-root/usr/share/applications/*.desktop squashfs-root/
             mv squashfs-root/python.png squashfs-root/xun.png
+            mv projects/.circleci/appimage/xun.appdata.xml squashfs-root-xun/usr/share/metainfo/xun.desktop.appdata.xml
             mv squashfs-root squashfs-root-xun
       - run:
           name: Convert back into an AppImage
