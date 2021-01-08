@@ -209,7 +209,7 @@ jobs:
           name: Install Xun to image
           command: |
             ./python3.8.AppImage --appimage-extract
-            ./squashfs-root/AppRun -m pip install git+https://github.com/equinor/xun.git
+            ./squashfs-root/AppRun -m pip install .
       - run: 
           name: Setup Xun AppImage
           command: |
