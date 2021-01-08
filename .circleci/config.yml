@@ -192,7 +192,6 @@ jobs:
       - ARCH: x86_64
       - TRAVIS_PULL_REQUEST: "false"
       - TRAVIS_TAG: << pipeline.git.tag >>
-      - GITHUB_TOKEN: token
     steps:
       - checkout
       - run:
@@ -228,16 +227,12 @@ jobs:
           name: Convert back into an AppImage
           command: |
             echo "export TRAVIS_REPO_SLUG=${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" >> $BASH_ENV
+            echo "export TRAVIS_COMMIT=${CIRCLE_SHA1}" >> $BASH_ENV
             source $BASH_ENV
             wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
             chmod +x appimagetool-*.AppImage
             ./appimagetool-*-x86_64.AppImage --appimage-extract
             ./squashfs-root/AppRun squashfs-root-xun/
-      - run:
-          name: Upload AppImage
-          command: |
-            echo "upload appimage tag"
-            
 
 
 workflows:
@@ -317,8 +312,8 @@ workflows:
     jobs:
       - appimage-upload:
           name: Create and upload appimage 
-#          filters:
-#            tags:
-#              only: /[0-9]+(\.[0-9]+)*/
-#            branches:
-#              ignore: /.*/
+          filters:
+            tags:
+              only: /[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
