@@ -228,6 +228,7 @@ jobs:
             echo "export TRAVIS_REPO_SLUG=${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" >> $BASH_ENV
             echo "export TRAVIS_COMMIT=${CIRCLE_SHA1}" >> $BASH_ENV
             echo "export TRAVIS_TAG=${CIRCLE_TAG}" >> $BASH_ENV
+            echo "export VERSION=${CIRCLE_TAG}" >> $BASH_ENV
             source $BASH_ENV
             wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
             chmod +x appimagetool-*.AppImage
